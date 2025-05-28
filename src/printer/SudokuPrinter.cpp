@@ -62,6 +62,40 @@ void SudokuPrinter::drawTitle() const {
                                       )" << std::endl << std::endl;
 }
 
+void SudokuPrinter::showTitle() const {
+    system("cls");
+    char sud[6] = {'S','U','D','O','K','U'};
+
+    for (int i = 0; i < 6; i++) std::cout << "\n";
+    std::cout << "\t\t";
+
+    for (int i = 0; i < 6; i++) {
+        std::cout << " ";
+        Sleep(450);
+        static CONSOLE_FONT_INFOEX fontex;
+        fontex.cbSize = sizeof(CONSOLE_FONT_INFOEX);
+        HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+        GetCurrentConsoleFontEx(hOut, 0, &fontex);
+        fontex.FontWeight = 1200;
+        fontex.dwFontSize.X = 60;
+        fontex.dwFontSize.Y = 60;
+        SetCurrentConsoleFontEx(hOut, NULL, &fontex);
+        std::cout << sud[i];
+    }
+
+    Sleep(850);
+    system("cls");
+
+    static CONSOLE_FONT_INFOEX fontex;
+    fontex.cbSize = sizeof(CONSOLE_FONT_INFOEX);
+    HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);
+    GetCurrentConsoleFontEx(hOut, 0, &fontex);
+    fontex.FontWeight = 500;
+    fontex.dwFontSize.X = 30;
+    fontex.dwFontSize.Y = 30;
+    SetCurrentConsoleFontEx(hOut, NULL, &fontex);
+}
+
 void SudokuPrinter::printMenu() const {
     SetConsoleTextAttribute(hConsole, 14);
     std::cout << R"(
@@ -109,4 +143,16 @@ void SudokuPrinter::printStyleMenu() const {
 )" << std::endl;
     SetConsoleTextAttribute(hConsole, 15);
     std::cout << "  Enter your choice (1-3): ";
+}
+
+void SudokuPrinter::printWinMessage(int moves) const {
+    SetConsoleTextAttribute(hConsole, 10);
+    std::cout << R"(
+  +-----------------------------------------------------+
+  |              CONGRATULATIONS! YOU WON!              |
+  +-----------------------------------------------------+
+  |  You solved the Sudoku puzzle in )" << std::setw(3) << moves << R"( moves!        |
+  +-----------------------------------------------------+
+)" << std::endl;
+    SetConsoleTextAttribute(hConsole, 15);
 }
