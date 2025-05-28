@@ -3,7 +3,7 @@ project(course work)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(sudoku src/main.cpp
+add_executable(course work src/main.cpp
         include/theme/ThemeFactory.h
         include/theme/LightTheme.h
         include/theme/DarkTheme.h
